@@ -7,12 +7,10 @@ Examples:
 */
 
 function extractValue(arr, key) {
-    const names = [];
-    arr.reduce(function(accum, nextVal){
-        names.push(nextVal[key])
-        return nextVal;
-    }, names)
-    return names;
+    return arr.reduce(function(accum, nextVal){
+        accum.push(nextVal[key])
+        return accum;
+    }, [])
 }
 
 /*
@@ -27,6 +25,18 @@ Examples:
 */
 
 function vowelCount(str) {
+    const vowels = 'aeiou';
+    const vowelsObj = {}
+    return Array.from(str).reduce(function(acc, val){
+        if(vowels.indexOf(val) !== -1){
+            if(vowelsObj[val]){
+                vowelsObj[val]++;
+            } else {
+                vowelsObj[val] = 1;
+            }
+        }
+        return acc;
+    }, vowelsObj)
 }
 
 /*
@@ -44,7 +54,12 @@ Examples:
        ]
 */
 
-function addKeyAndValue(arr, key, value) {}
+function addKeyAndValue(arr, key, value){
+    return arr.reduce(function(acc, cur, idx){
+        acc[idx][key] = value;
+        return acc;
+    }, arr);
+}
 
 /*
 Write a function called partition which accepts an array and a callback and returns an array with two arrays inside of it. The partition function should run the callback function on each value in the array and if the result of the callback function at that specific value is true, the value should be placed in the first subarray. If the result of the callback function at that specific value is false, the value should be placed in the second subarray. 
